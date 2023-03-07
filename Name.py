@@ -1,4 +1,6 @@
 class Name:
     pass
 class NameGender:
-    pass
+    @staticmethod
+    def fetch_gender():
+        return Database.fetch_gender()

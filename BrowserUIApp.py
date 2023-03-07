@@ -1,6 +1,8 @@
 #!/usr/bin/python3
 import pathlib
 import tkinter as tk
+from tkinter import ttk
+
 import pygubu
 PROJECT_PATH = pathlib.Path(__file__).parent
 PROJECT_UI = PROJECT_PATH / "browser.ui"
@@ -9,8 +11,8 @@ PROJECT_UI = PROJECT_PATH / "browser.ui"
 class BrowserApp:
     def __init__(self, parent):
         self.start_ui(parent)
-
-
+        self.setup_gender_radio()
+        self.search_button = ttk.Button(parent, command=self.button_clicked)
     def start_ui(self, parent):
         builder = pygubu.Builder()
         builder.add_resource_path(PROJECT_PATH)
@@ -25,7 +27,28 @@ class BrowserApp:
         self.female_button = builder.get_object('female_radio', parent)
         self.name_entry = builder.get_object('name_entry', parent)
 
-    def _search_names(self):
+        # Create a new instance of a tkinter string variable to hold the selected gender
+        self.gender_var = tk.StringVar()
+
+        # Configure the female radio button to use the gender variable and set its value to "F"
+        self.builder.get_object("female_radio").config(variable=self.gender_var, value="F")
+
+        # Configure the male radio button to use the gender variable and set its value to "M"
+        self.builder.get_object("male_radio").config(variable=self.gender_var, value="M")
+
+    def button_clicked(self):
+        name = self.name_entry.get()
+        print(f"Searching for name: {name}")
+        # Get the selected gender
+        # Get the selected gender
+        gender = self.gender_var.get()
+
+        # Print the selected gender
+        print("Selected gender:", gender)
+
+    def setup_gender_radio(self):
+        pass
+    def search_names(self):
         pass
 
 
