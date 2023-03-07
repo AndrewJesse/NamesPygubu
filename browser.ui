@@ -56,6 +56,7 @@
         </child>
         <child>
           <object class="ttk.Button" id="search_button" named="True">
+            <property name="command" type="command" cbtype="simple">search_names</property>
             <property name="text" translatable="yes">Search</property>
             <layout manager="grid">
               <property name="column">4</property>
