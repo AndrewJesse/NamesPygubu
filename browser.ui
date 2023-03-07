@@ -18,7 +18,7 @@
           <property name="row">0</property>
         </layout>
         <child>
-          <object class="ttk.Radiobutton" id="radiobutton1">
+          <object class="ttk.Radiobutton" id="male_radio" named="True">
             <property name="text" translatable="yes">Male</property>
             <layout manager="grid">
               <property name="column">2</property>
@@ -28,7 +28,7 @@
           </object>
         </child>
         <child>
-          <object class="ttk.Radiobutton" id="female_button" named="True">
+          <object class="ttk.Radiobutton" id="female_radio" named="True">
             <property name="text" translatable="yes">Female</property>
             <layout manager="grid">
               <property name="column">3</property>
