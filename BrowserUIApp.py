@@ -11,7 +11,7 @@ PROJECT_UI = PROJECT_PATH / "browser.ui"
 class BrowserApp:
     def __init__(self, parent):
         self.start_ui(parent)
-        self.setup_gender_radio()
+        #self.setup_gender_radio()
         self.search_button = ttk.Button(parent, command=self.button_clicked)
     def start_ui(self, parent):
         builder = pygubu.Builder()
@@ -40,14 +40,11 @@ class BrowserApp:
         name = self.name_entry.get()
         print(f"Searching for name: {name}")
         # Get the selected gender
-        # Get the selected gender
         gender = self.gender_var.get()
 
         # Print the selected gender
         print("Selected gender:", gender)
 
-    def setup_gender_radio(self):
-        pass
     def search_names(self):
         pass
 

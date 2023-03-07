@@ -1,6 +1,9 @@
+from Database import Database
+
+
 class Name:
     pass
-class NameGender:
+class NameFetcher:
     @staticmethod
-    def fetch_gender():
-        return Database.fetch_gender()
+    def Names():
+        return Database.fetch_names()
