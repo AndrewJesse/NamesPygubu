@@ -1,6 +1,5 @@
 import pyodbc
 
-
 class Database:
     # Connect to the database using the CIS 275 student account.
     __connection = None
@@ -24,6 +23,18 @@ class Database:
                     'DRIVER={ODBC Driver 17 for SQL Server};SERVER=' + server + ';DATABASE=' + database
                     + ';UID=' + username + ';PWD=' + password)
 
-    def fetch_names(cls):
-        from Name import NameFetcher
-        sql = "SELECT Name, Year, Gender, NameCount, Total FROM all_data WHERE Name = 'Marc' AND Gender = 'M' ORDER BY Year;"
+    @classmethod
+    def fetch_names(cls, name, gender):
+        from Name import Name
+        sql = "SELECT Name, Year, Gender, NameCount, Total FROM all_data WHERE Name = ? AND Gender = ? ORDER BY Year;"
+        cls.connect()
+        cursor = cls.__connection.cursor()
+        cursor.execute(sql, (name, gender))
+        print(name, gender)
+        names = []
+        for row in cursor:
+            name_obj = Name(row[0], row[1], row[2], row[3], row[4])
+            names.append(name_obj)
+        return names
+
+

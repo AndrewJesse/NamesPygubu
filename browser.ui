@@ -56,7 +56,7 @@
         </child>
         <child>
           <object class="ttk.Button" id="search_button" named="True">
-            <property name="command" type="command" cbtype="simple">button_clicked</property>
+            <property name="command" type="command" cbtype="simple">search_name</property>
             <property name="text" translatable="yes">Search</property>
             <layout manager="grid">
               <property name="column">4</property>
@@ -77,7 +77,7 @@
           <property name="sticky">nsew</property>
         </layout>
         <child>
-          <object class="ttk.Treeview" id="treeview1">
+          <object class="ttk.Treeview" id="name_tree" named="True">
             <property name="height">15</property>
             <property name="selectmode">extended</property>
             <layout manager="pack">
