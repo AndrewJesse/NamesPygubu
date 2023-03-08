@@ -1,5 +1,3 @@
-from Database import Database
-
 
 class Name:
 

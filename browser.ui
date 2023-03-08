@@ -79,7 +79,8 @@
         <child>
           <object class="ttk.Treeview" id="name_tree" named="True">
             <property name="height">15</property>
-            <property name="selectmode">extended</property>
+            <property name="selectmode">browse</property>
+            <property name="show">headings</property>
             <layout manager="pack">
               <property name="side">top</property>
             </layout>

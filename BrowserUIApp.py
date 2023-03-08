@@ -24,7 +24,8 @@ class BrowserApp:
         self.mainwindow = builder.get_object("top_level", parent)
         builder.connect_callbacks(self)
 
-        # retrieves the radio button widget object using the get_object() method of the Builder() object and assigns it to an instance variable for later use in callbacks.
+        # retrieves the radio button widget object using the get_object() method of the Builder() object and assigns
+        # it to an instance variable for later use in callbacks.
         self._builder = builder
         self._male_button = builder.get_object('male_radio', parent)
         self._female_button = builder.get_object('female_radio', parent)
@@ -42,15 +43,13 @@ class BrowserApp:
 
     def setup_tree(self):
         tree = self._tree
-        tree.configure(columns = (0,1,2,3,4), displaycolumns=(0,1,2,3,4))
-        #name, year, gender, nameCount, total
+        tree.configure(columns=(0, 1, 2, 3, 4), displaycolumns=(0, 1, 2, 3, 4))
         tree.heading(0, text="Name", anchor=tk.W)
         tree.heading(1, text="Year")
         tree.heading(2, text="Gender")
         tree.heading(3, text="Count")
         tree.heading(4, text="Total")
-
-        tree.column(0, width=175)
+        tree.column(0, width=100)
         tree.column(1, anchor=tk.CENTER, width=100)
         tree.column(2, anchor=tk.CENTER, width=100)
         tree.column(3, anchor=tk.CENTER, width=100)
@@ -60,18 +59,20 @@ class BrowserApp:
         name = self._name_entry.get()
         gender = self.gender_var.get()
 
-        names = Name.fetch_names(name, gender)
-
-        # Clear the tree
+        # Delete all existing items from the tree
         self._tree.delete(*self._tree.get_children())
 
-        # Insert each row of data into the tree
+        names = Name.fetch_names(name, gender)
+        self.insert_names_to_tree(names)
+
+    def insert_names_to_tree(self, names):
         for name in names:
             self._tree.insert("", tk.END, values=(
-            name.get_name(), name.get_year(), name.get_gender(), name.get_name_count(), name.get_total()))
-
-
-
+                name.get_name(),
+                name.get_year(),
+                name.get_gender(),
+                name.get_name_count(),
+                name.get_total()))
 
     def run(self):
         self.mainwindow.mainloop()
