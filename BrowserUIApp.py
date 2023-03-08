@@ -1,3 +1,6 @@
+# Author: Andrew Marchese
+# Date: 3/8/2023
+# Title: Lab 9 GUI Part II
 #!/usr/bin/python3
 import pathlib
 import tkinter as tk
@@ -16,6 +19,7 @@ class BrowserApp:
         self.setup_tree()
         self.search_button = ttk.Button(parent, command=self.search_name)
 
+    # Initiate controls and main UI
     def init_ui(self, parent):
         builder = pygubu.Builder()
         builder.add_resource_path(PROJECT_PATH)
@@ -42,7 +46,9 @@ class BrowserApp:
         self._tree = builder.get_object('name_tree', parent)
 
     def setup_tree(self):
+        # Visual arrangement for the Treeview
         tree = self._tree
+        self.create_treeview_style()
         tree.configure(columns=(0, 1, 2, 3, 4), displaycolumns=(0, 1, 2, 3, 4))
         tree.heading(0, text="Name", anchor=tk.W)
         tree.heading(1, text="Year")
@@ -55,6 +61,46 @@ class BrowserApp:
         tree.column(3, anchor=tk.CENTER, width=100)
         tree.column(4, anchor=tk.CENTER, width=100)
 
+    @staticmethod
+    def create_treeview_style():
+        # noinspection PyUnresolvedReferences
+        style = tk.ttk.Style()
+
+        # fix for bug in alternating colors in Treeview in later versions of tkinter
+        # see https://bugs.python.org/issue36468 for details
+        style.map('Treeview', foreground=BrowserApp.fixed_map('foreground', style),
+                  background=BrowserApp.fixed_map('background', style))
+
+        style.element_create("Custom.Treeheading.border", "from", "default")
+        style.layout("Custom.Treeview.Heading", [
+            ("Custom.Treeheading.cell", {'sticky': 'nswe'}),
+            ("Custom.Treeheading.border", {'sticky': 'nswe', 'children': [
+                ("Custom.Treeheading.padding", {'sticky': 'nswe', 'children': [
+                    ("Custom.Treeheading.image", {'side': 'right', 'sticky': ''}),
+                    ("Custom.Treeheading.text", {'sticky': 'we'})
+                ]})
+            ]}),
+        ])
+        style.configure("Custom.Treeview.Heading",
+                        background="dark blue", foreground="white", relief="flat", font=('Arial Black', 10, 'bold'))
+        style.map("Custom.Treeview.Heading",
+                  relief=[('active', 'groove'), ('pressed', 'sunken')])
+        # Set the background color of the treeview to light gray
+        style.configure("Treeview", background="light gray")
+        return style
+    # Fix bug in alternating colors in Treeview for later versions of tkinter
+    @staticmethod
+    def fixed_map(option, style):
+        # Fix for setting text colour for Tkinter 8.6.9
+        # From: https://core.tcl.tk/tk/info/509cafafae
+        #
+        # Returns the style map for 'option' with any styles starting with
+        # ('!disabled', '!selected', ...) filtered out.
+
+        # style.map() returns an empty list for missing options, so this
+        # should be future-safe.
+        return [elm for elm in style.map('Treeview', query_opt=option) if
+                elm[:2] != ('!disabled', '!selected')]
     def search_name(self):
         name = self._name_entry.get()
         gender = self.gender_var.get()

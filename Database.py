@@ -1,5 +1,7 @@
+# Author: Andrew Marchese
+# Date: 3/8/2023
+# Title: Lab 9 GUI Part II
 import pyodbc
-
 
 class Database:
     # Connect to the database using the CIS 275 student account.

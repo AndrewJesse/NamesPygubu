@@ -1,4 +1,6 @@
-
+# Author: Andrew Marchese
+# Date: 3/8/2023
+# Title: Lab 9 GUI Part II
 class Name:
 
     def __init__(self, name, year, gender, nameCount, total):
